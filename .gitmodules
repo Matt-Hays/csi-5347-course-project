@@ -1,0 +1,9 @@
+[submodule "loyalty-program-service"]
+	path = loyalty-program-service
+	url = git@github.com:Matt-Hays/loyalty-program-service.git
+[submodule "inventory-service"]
+	path = inventory-service
+	url = git@github.com:Matt-Hays/inventory-service.git
+[submodule "point-of-sale-service"]
+	path = point-of-sale-service
+	url = git@github.com:Matt-Hays/point-of-sale-service.git
