@@ -1,0 +1,24 @@
+services:
+  inventory-configuration:
+    image: docker.io/library/inventory-configuration:0.0.1-SNAPSHOT
+    ports:
+      - "8071:8071"
+    environment:
+      SERVER_PORT: 8071
+      ENCRYPT_KEY: FH2xdsHeap36Ax9qfJAk4WIlHNPrgvb2HAe1gwwhSFPOogBCMQOWjGjLdhVaXZEM
+  inventory-db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: inventory_db
+    networks:
+      inventory_backend:
+        aliases:
+          - "database"
+
+networks:
+  inventory_backend:
+    driver: bridge

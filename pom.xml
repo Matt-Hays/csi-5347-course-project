@@ -25,13 +25,13 @@
 	</properties>
 
 	<modules>
-	<module>inventory-configuration</module>
-	<!-- <module>inventory-service</module>
-		<module>poing-of-sale-configuration</module>
+		<module>inventory-configuration</module>
+		<module>inventory-service</module>
+		<!-- <module>poing-of-sale-configuration</module>
 		<module>point-of-sale-service</module>
 		<module>loyalty-program-configuration</module>
-		<module>loyalty-program-service</module>
-	</modules> -->
+		<module>loyalty-program-service</module> -->
+	</modules>
 
 	<dependencies>
 		<dependency>
