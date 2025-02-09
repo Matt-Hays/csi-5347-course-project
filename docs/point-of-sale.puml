@@ -1,0 +1,88 @@
+@startuml
+
+class Customer {
+	- id: int
+	- name: String
+	- address: String
+}
+
+class Product {
+	- id: int
+	- name: String
+	- price: float
+}
+
+class LineItem {
+	- product: Product
+	- quantity: int
+}
+
+Product "*" -- "*" LineItem : < contains
+
+class Transaction {
+	- id: int
+	- customer: Customer
+	- products: List[LineItem]
+	- /totalAmount: float
+	- payments: List[PaymentStrategy]
+	- status: TransactionStatus
+	+ getStatus(): TransactionStatus
+	+ getTotalAmount(): float
+	+ complete(): void
+	+ cancel(): void
+	+ generateReceipt(): String
+}
+
+enum TransactionStatus {
+	PENDING, COMPLETED, CANCELLED
+}
+
+Transaction "*" -- "1" TransactionStatus: describedBy >
+
+Customer "*" -- "1" Transaction :  orders >
+LineItem "*" -- "1" Transaction : < contains
+
+
+class Register {
+	- id: int
+	- employee: Cashier
+}
+
+Register "1" -- "*" Transaction : records >
+
+class Cashier {
+	- id: int
+	- name: String
+	- position: String
+}
+
+Cashier "1" -- "1" Register : operates >
+
+interface PaymentStrategy {
+	+ pay(transaction: Transaction): void
+}
+
+class PayByCard implements PaymentStrategy {
+	- amount: float
+	+ pay(transaction: Transaction): void
+}
+
+class PayByCash implements PaymentStrategy {
+	- amount: float
+	+ pay(transaction: Transaction): void
+}
+
+class PayByLoyaltyPoints implements PaymentStrategy {
+	- points: int
+	- valuePerPoint: float
+	+ pay(transaction: Transaction): void
+}
+
+class PayByCoupon implements PaymentStrategy {
+	- amount: float
+	+ pay(transaction: Transaction): void
+}
+
+PaymentStrategy "0..*" -- "1" Transaction : appliedTo >
+
+@enduml
