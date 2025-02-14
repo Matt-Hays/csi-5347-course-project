@@ -25,7 +25,7 @@
 	</properties>
 
 	<modules>
-		<module>inventory-configuration</module>
+<!--		<module>inventory-configuration</module>-->
 		<module>inventory-service</module>
 		<!-- <module>poing-of-sale-configuration</module>
 		<module>point-of-sale-service</module>
