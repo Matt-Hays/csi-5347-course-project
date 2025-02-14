@@ -16,6 +16,3 @@
 [submodule "loyalty-program-configuration"]
 	path = loyalty-program-configuration
 	url = git@github.com:Matt-Hays/loyalty-program-configuration.git
-[submodule "inventory-configuration"]
-	path = inventory-configuration
-	url = git@github.com:Matt-Hays/inventory-configuration.git
