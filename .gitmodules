@@ -13,6 +13,3 @@
 [submodule "point-of-sale-configuration"]
 	path = point-of-sale-configuration
 	url = git@github.com:Matt-Hays/point-of-sale-configuration.git
-[submodule "loyalty-program-configuration"]
-	path = loyalty-program-configuration
-	url = git@github.com:Matt-Hays/loyalty-program-configuration.git
