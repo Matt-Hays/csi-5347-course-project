@@ -14,7 +14,6 @@ This project is a distributed systems implementation for the CSI 5347 course. It
 - [Configuration Management](#configuration-management)
 - [Testing](#testing)
 - [Planned Features](#planned-features)
-- [License](#license)
 
 ---
 
