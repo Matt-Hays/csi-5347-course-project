@@ -13,3 +13,6 @@
 [submodule "configuration-server"]
 	path = configuration-server
 	url = git@github.com:Matt-Hays/configuration-server.git
+[submodule "configuration-repository"]
+	path = configuration-repository
+	url = git@github.com:Matt-Hays/configuration-repository.git
