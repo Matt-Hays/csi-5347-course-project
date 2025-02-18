@@ -1,0 +1,117 @@
+services:
+  configuration-server:
+    image: docker.io/library/configuration-server:0.0.1-SNAPSHOT
+    ports:
+      - "${CONFIG_PORT:-8071}:${CONFIG_PORT:-8071}"
+    environment:
+      SERVER_PORT: ${CONFIG_PORT:-8071}
+    networks:
+      backend:
+        aliases:
+          - "configserver"
+
+  inventory-service-db:
+    image: postgres:latest
+    ports:
+      - "${INVENTORY_DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: inventory_service
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/inventory-service/data/1-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      backend:
+        aliases:
+          - "inventorydb"
+
+  loyalty-program-service-db:
+    image: postgres:latest
+    ports:
+      - "${LOYALTY_DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: loyalty_program_service
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/loyalty-program-service/data/1-init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      backend:
+        aliases:
+          - "loyaltydb"
+
+  point-of-sale-service-db:
+    image: postgres:latest
+    ports:
+      - "${POS_DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: point_of_sale_service
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/point-of-sale-service/data/1-init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      backend:
+        aliases:
+          - "posdb"
+
+  inventory-service:
+    image: docker.io/library/inventory-service:0.0.1-SNAPSHOT
+    ports:
+      - "${INVENTORY_SERVICE_PORT:-8080}:${INVENTORY_SERVICE_PORT:-8080}"
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
+      SPRING_PROFILES_ACTIVE: "${INVENTORY_SERVICE_PROFILE:-dev}"
+      DATABASESERVER_PORT: "${INVENTORY_DB_PORT:-5432}"
+    depends_on:
+      inventory-service-db:
+        condition: service_healthy
+    networks:
+      - backend
+
+  loyalty-program-service:
+    image: docker.io/library/loyalty-service:0.0.1-SNAPSHOT
+    ports:
+      - "${LOYALTY_SERVICE_PORT:-8080}:${LOYALTY_SERVICE_PORT:-8080}"
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
+      SPRING_PROFILES_ACTIVE: "${LOYALTY_SERVICE_PROFILE:-dev}"
+      DATABASESERVER_PORT: "${LOYALTY_DB_PORT:-5432}"
+    depends_on:
+      loyalty-program-service-db:
+        condition: service_healthy
+    networks:
+      - backend
+
+  point-of-sale-service:
+    image: docker.io/library/point-of-sale-service:0.0.1-SNAPSHOT
+    ports:
+      - "${POS_SERVICE_PORT:-8080}:${POS_SERVICE_PORT:-8080}"
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
+      SPRING_PROFILES_ACTIVE: "${POS_SERVICE_PROFILE:-dev}"
+      DATABASESERVER_PORT: "${POS_DB_PORT:-5432}"
+    depends_on:
+      point-of-sale-service-db:
+        condition: service_healthy
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
