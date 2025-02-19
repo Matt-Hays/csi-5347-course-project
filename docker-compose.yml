@@ -73,7 +73,7 @@ services:
   inventory-service:
     image: docker.io/library/inventory-service:0.0.1-SNAPSHOT
     ports:
-      - "${INVENTORY_SERVICE_PORT:-8080}:${INVENTORY_SERVICE_PORT:-8080}"
+      - "${INVENTORY_SERVICE_PORT:-8080}:8080"
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${INVENTORY_SERVICE_PROFILE:-dev}"
@@ -87,7 +87,7 @@ services:
   loyalty-program-service:
     image: docker.io/library/loyalty-service:0.0.1-SNAPSHOT
     ports:
-      - "${LOYALTY_SERVICE_PORT:-8080}:${LOYALTY_SERVICE_PORT:-8080}"
+      - "${LOYALTY_SERVICE_PORT:-8080}:8080"
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${LOYALTY_SERVICE_PROFILE:-dev}"
@@ -101,7 +101,7 @@ services:
   point-of-sale-service:
     image: docker.io/library/point-of-sale-service:0.0.1-SNAPSHOT
     ports:
-      - "${POS_SERVICE_PORT:-8080}:${POS_SERVICE_PORT:-8080}"
+      - "${POS_SERVICE_PORT:-8080}:8080"
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${POS_SERVICE_PROFILE:-dev}"
