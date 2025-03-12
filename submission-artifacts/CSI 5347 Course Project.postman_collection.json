@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "61ab0dde-bb64-4440-b7d8-b0df1198f304",
+		"_postman_id": "35aa456d-729c-4c43-b78b-adf2a9994c2b",
 		"name": "CSI 5347 Course Project",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17018911"
+		"_exporter_id": "25800081"
 	},
 	"item": [
 		{
@@ -12,6 +12,35 @@
 				{
 					"name": "Product Endpoints",
 					"item": [
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Test Product\",\n    \"description\": \"Test Product Description\",\n    \"price\": 10.99,\n    \"quantity\": 11.00\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Get All Products",
 							"request": {
@@ -48,35 +77,6 @@
 										"v1",
 										"product",
 										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Product",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Test Product\",\n    \"description\": \"Test Product Description\",\n    \"price\": 10.99,\n    \"quantity\": 11.00\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/v1/product",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"product"
 									]
 								}
 							},
@@ -1299,6 +1299,82 @@
 										"v1",
 										"loyalty",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Credit Account",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "points",
+										"value": "20",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/loyalty/1/credit?points=30.5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"loyalty",
+										"1",
+										"credit"
+									],
+									"query": [
+										{
+											"key": "points",
+											"value": "30.5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deduct Account",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "points",
+										"value": "20",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/loyalty/1/deduct?points=20.5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"loyalty",
+										"1",
+										"deduct"
+									],
+									"query": [
+										{
+											"key": "points",
+											"value": "20.5"
+										}
 									]
 								}
 							},
