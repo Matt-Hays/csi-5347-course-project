@@ -81,6 +81,8 @@ services:
     depends_on:
       inventory-service-db:
         condition: service_healthy
+      configuration-server:
+        condition: service_started
     networks:
       - backend
 
@@ -95,6 +97,8 @@ services:
     depends_on:
       loyalty-program-service-db:
         condition: service_healthy
+      configuration-server:
+        condition: service_started
     networks:
       - backend
 
@@ -109,6 +113,8 @@ services:
     depends_on:
       point-of-sale-service-db:
         condition: service_healthy
+      configuration-server:
+        condition: service_started
     networks:
       - backend
 
