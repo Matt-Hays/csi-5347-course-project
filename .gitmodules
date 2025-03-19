@@ -16,3 +16,6 @@
 [submodule "configuration-repository"]
 	path = configuration-repository
 	url = git@github.com:Matt-Hays/configuration-repository.git
+[submodule "service-discovery"]
+	path = service-discovery
+	url = https://github.com/Matt-Hays/service-discovery.git
