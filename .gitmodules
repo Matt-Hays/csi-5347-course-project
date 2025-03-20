@@ -19,3 +19,6 @@
 [submodule "service-discovery"]
 	path = service-discovery
 	url = https://github.com/Matt-Hays/service-discovery.git
+[submodule "gateway-server"]
+	path = gateway-server
+	url = https://github.com/ronwellman/gateway-server
