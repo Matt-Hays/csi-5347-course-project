@@ -58,12 +58,16 @@ services:
       EUREKASERVER_PORT: "${EUREKA_PORT:-8070}"
       CONFIGSERVER_PORT: "${CONFIG_PORT:-8071}"
     depends_on:
-      database:
+      inventory-service-db:
         condition: service_healthy
-      configserver:
+      point-of-sale-service-db:
+        condition: service_healthy
+      loyalty-program-service-db:
+        condition: service_healthy
+      configuration-server:
         condition: service_started
-      eurekaserver:
-        condition: service_started
+      # eureka-server:
+      #   condition: service_started
     networks:
       backend:
         aliases:
