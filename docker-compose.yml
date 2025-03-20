@@ -23,6 +23,7 @@ services:
 
   configuration-server:
     image: docker.io/library/configuration-server:0.0.1-SNAPSHOT
+    restart: on-failure
     ports:
       - "${CONFIG_PORT:-8071}:${CONFIG_PORT:-8071}"
     environment:
@@ -34,6 +35,7 @@ services:
 
   service-discovery:
     image: docker.io/library/service-discovery:0.0.1-SNAPSHOT
+    restart: on-failure
     ports:
       - "8070:8070"
     depends_on:
@@ -46,15 +48,16 @@ services:
         aliases:
           - "servicediscovery"
 
-  gatewayserver:
+  gateway-server:
     image: docker.io/library/gatewayserver:0.0.1-SNAPSHOT
+    restart: on-failure
     ports:
       - "${GATEWAY_PORT:-8072}:${GATEWAY_PORT:-8072}"
     environment:
       PROFILE: "default"
       SERVER_PORT: "${GATEWAY_PORT:-8072}"
       CONFIGSERVER_URI: "http://configserver:${CONFIG_PORT:-8071}"
-      EUREKASERVER_URI: "http://eurekaserver:${EUREKA_PORT:-8070}/eureka/"
+      EUREKASERVER_URI: "http://servicediscovery:${EUREKA_PORT:-8070}/eureka/"
       EUREKASERVER_PORT: "${EUREKA_PORT:-8070}"
       CONFIGSERVER_PORT: "${CONFIG_PORT:-8071}"
     depends_on:
@@ -66,8 +69,8 @@ services:
         condition: service_healthy
       configuration-server:
         condition: service_started
-      # eureka-server:
-      #   condition: service_started
+      service-discovery:
+        condition: service_started
     networks:
       backend:
         aliases:
@@ -75,6 +78,7 @@ services:
 
   inventory-service-db:
     image: postgres:latest
+    restart: always
     ports:
       - "${INVENTORY_DB_PORT:-5431}:5432"
     environment:
@@ -95,6 +99,7 @@ services:
 
   loyalty-program-service-db:
     image: postgres:latest
+    restart: always
     ports:
       - "${LOYALTY_DB_PORT:-5432}:5432"
     environment:
@@ -115,6 +120,7 @@ services:
 
   point-of-sale-service-db:
     image: postgres:latest
+    restart: always
     ports:
       - "${POS_DB_PORT:-5433}:5432"
     environment:
@@ -135,6 +141,7 @@ services:
 
   inventory-service:
     image: docker.io/library/inventory-service:0.0.1-SNAPSHOT
+    restart: on-failure
     ports:
       - "${INVENTORY_SERVICE_PORT:-8083}:8080"
     environment:
@@ -151,6 +158,7 @@ services:
 
   loyalty-program-service:
     image: docker.io/library/loyalty-service:0.0.1-SNAPSHOT
+    restart: on-failure
     ports:
       - "${LOYALTY_SERVICE_PORT:-8081}:8080"
     environment:
@@ -167,6 +175,7 @@ services:
 
   point-of-sale-service:
     image: docker.io/library/point-of-sale-service:0.0.1-SNAPSHOT
+    restart: on-failure
     ports:
       - "${POS_SERVICE_PORT:-8082}:8080"
     environment:
