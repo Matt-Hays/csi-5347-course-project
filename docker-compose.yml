@@ -10,10 +10,24 @@ services:
         aliases:
           - "configserver"
 
+  service-discovery:
+    image: docker.io/library/service-discovery:0.0.1-SNAPSHOT
+    ports:
+      - "8070:8070"
+    depends_on:
+      inventory-service-db:
+        condition: service_healthy
+      configuration-server:
+        condition: service_started
+    networks:
+      backend:
+        aliases:
+          - "servicediscovery"
+
   inventory-service-db:
     image: postgres:latest
     ports:
-      - "${INVENTORY_DB_PORT:-5432}:5432"
+      - "${INVENTORY_DB_PORT:-5431}:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -53,7 +67,7 @@ services:
   point-of-sale-service-db:
     image: postgres:latest
     ports:
-      - "${POS_DB_PORT:-5432}:5432"
+      - "${POS_DB_PORT:-5433}:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -77,7 +91,7 @@ services:
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${INVENTORY_SERVICE_PROFILE:-dev}"
-      DATABASESERVER_PORT: "${INVENTORY_DB_PORT:-5432}"
+      DATABASESERVER_PORT: "${INVENTORY_DB_PORT:-5431}"
     depends_on:
       inventory-service-db:
         condition: service_healthy
@@ -89,7 +103,7 @@ services:
   loyalty-program-service:
     image: docker.io/library/loyalty-service:0.0.1-SNAPSHOT
     ports:
-      - "${LOYALTY_SERVICE_PORT:-8080}:8080"
+      - "${LOYALTY_SERVICE_PORT:-8081}:8080"
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${LOYALTY_SERVICE_PROFILE:-dev}"
@@ -105,11 +119,11 @@ services:
   point-of-sale-service:
     image: docker.io/library/point-of-sale-service:0.0.1-SNAPSHOT
     ports:
-      - "${POS_SERVICE_PORT:-8080}:8080"
+      - "${POS_SERVICE_PORT:-8082}:8080"
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${POS_SERVICE_PROFILE:-dev}"
-      DATABASESERVER_PORT: "${POS_DB_PORT:-5432}"
+      DATABASESERVER_PORT: "${POS_DB_PORT:-5433}"
     depends_on:
       point-of-sale-service-db:
         condition: service_healthy
