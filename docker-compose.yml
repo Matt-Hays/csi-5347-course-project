@@ -1,4 +1,26 @@
 services:
+  keycloak:
+    image: keycloak/keycloak:latest
+    restart: always
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_IMPORT: /opt/keycloak/data/import/realm.json
+      JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.migration.strategy=OVERWRITE_EXISTING"
+      KEYCLOAK_PROFILE_FEATURE_UPLOAD_SCRIPTS: enabled
+    volumes:
+      - ./realm.json:/opt/keycloak/data/import/realm.json
+    command:
+      - "start-dev"
+      - "--http-port=8080"
+      - "--import-realm"
+    ports:
+      - "8080:8080"
+    networks:
+      backend:
+        aliases:
+          - "keycloak"
+
   configuration-server:
     image: docker.io/library/configuration-server:0.0.1-SNAPSHOT
     ports:
@@ -35,7 +57,7 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/inventory-service/data/1-init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -87,7 +109,7 @@ services:
   inventory-service:
     image: docker.io/library/inventory-service:0.0.1-SNAPSHOT
     ports:
-      - "${INVENTORY_SERVICE_PORT:-8080}:8080"
+      - "${INVENTORY_SERVICE_PORT:-8083}:8080"
     environment:
       SPRING_CONFIG_IMPORT: "configserver:${CONFIG_SERVER_URI:-http://configserver:8071}"
       SPRING_PROFILES_ACTIVE: "${INVENTORY_SERVICE_PROFILE:-dev}"
