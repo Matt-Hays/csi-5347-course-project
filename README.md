@@ -22,29 +22,35 @@ This project is a distributed systems implementation for the CSI 5347 course. It
 This project implements a microservices-based distributed system with the following components:
 
 - **Configuration Server (`configuration-server/`)**
-    - A Spring Cloud Config Server that centralizes configuration management.
-    - Loads configuration from a separate repository located in `configuration-repository/`.
+
+  - A Spring Cloud Config Server that centralizes configuration management.
+  - Loads configuration from a separate repository located in `configuration-repository/`.
 
 - **Inventory Service (`inventory-service/`)**
-    - Manages vendors, products, and purchase orders.
-    - Uses a PostgreSQL database for persistence.
+
+  - Manages vendors, products, and purchase orders.
+  - Uses a PostgreSQL database for persistence.
 
 - **Loyalty Program Service (`loyalty-program-service/`)**
-    - Manages customer accounts and loyalty rewards.
-    - Uses a separate PostgreSQL database for persistence.
+
+  - Manages customer accounts and loyalty rewards.
+  - Uses a separate PostgreSQL database for persistence.
 
 - **Point of Sale (POS) Service (`point-of-sale-service/`)**
-    - Handles sales transactions, registers, and employees.
-    - Uses another PostgreSQL database for persistence.
+
+  - Handles sales transactions, registers, and employees.
+  - Uses another PostgreSQL database for persistence.
 
 - **Docker Compose (`docker-compose.yml`)**
-    - Orchestrates all microservices, their databases, and environment configurations.
+
+  - Orchestrates all microservices, their databases, and environment configurations.
 
 - **Security Service (Future Work) (`csi-5347-course-project-security/`)**
-    - A planned service for implementing authentication and authorization using **Keycloak**.
+
+  - A planned service for implementing authentication and authorization using **Keycloak**.
 
 - **Submission Artifacts (`submission-artifacts/`)**
-    - Contains documentation and required artifacts for the project submission.
+  - Contains documentation and required artifacts for the project submission.
 
 ---
 
@@ -107,10 +113,12 @@ The services are designed to be run as Docker containers. Use the following comm
 CONFIG_PORT=8071 INVENTORY_DB_PORT=5432 LOYALTY_DB_PORT=5433 POS_DB_PORT=5434 \
 INVENTORY_SERVICE_PORT=8080 INVENTORY_SERVICE_PROFILE=dev LOYALTY_SERVICE_PORT=8081 \
 LOYALTY_SERVICE_PROFILE=dev POS_SERVICE_PORT=8082 POS_SERVICE_PROFILE=dev \
+GATEWAY_PORT=8072 \
 docker compose up -d
 ```
 
 This will:
+
 - Start the **Configuration Server** at port `8071`.
 - Start **PostgreSQL instances** for each microservice (`5432`, `5433`, `5434`).
 - Start the **Inventory Service** (`8080`), **Loyalty Program Service** (`8081`), and **POS Service** (`8082`).
@@ -166,10 +174,12 @@ cd inventory-service && mvn test
 ## Planned Features
 
 - **Security Implementation**
-    - The `csi-5347-course-project-security/` module will integrate **Keycloak** for authentication and authorization.
+
+  - The `csi-5347-course-project-security/` module will integrate **Keycloak** for authentication and authorization.
 
 - **Enhanced Service Discovery and Load Balancing**
-    - Future work may introduce **Spring Cloud Eureka** for service discovery.
+
+  - Future work may introduce **Spring Cloud Eureka** for service discovery.
 
 - **Logging and Monitoring**
-    - Plans to integrate centralized logging using **ELK Stack** (Elasticsearch, Logstash, Kibana) or **Prometheus/Grafana**.
+  - Plans to integrate centralized logging using **ELK Stack** (Elasticsearch, Logstash, Kibana) or **Prometheus/Grafana**.
