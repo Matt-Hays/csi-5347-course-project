@@ -156,6 +156,8 @@ services:
         condition: service_healthy
       configuration-server:
         condition: service_started
+      service-discovery:
+        condition: service_started
     networks:
       - backend
 
@@ -189,6 +191,8 @@ services:
       point-of-sale-service-db:
         condition: service_healthy
       configuration-server:
+        condition: service_started
+      service-discovery:
         condition: service_started
     networks:
       - backend
