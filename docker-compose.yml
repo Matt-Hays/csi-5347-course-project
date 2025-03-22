@@ -85,6 +85,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: inventory_service
+      GATEWAY_PORT: "${GATEWAY_PORT:-8072}"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/inventory-service/data/1-init.sql
     healthcheck:
@@ -106,6 +107,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: loyalty_program_service
+      GATEWAY_PORT: "${GATEWAY_PORT:-8072}"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/loyalty-program-service/data/1-init.sql
     healthcheck:
@@ -127,6 +129,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: point_of_sale_service
+      GATEWAY_PORT: "${GATEWAY_PORT:-8072}"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/point-of-sale-service/data/1-init.sql
     healthcheck:
