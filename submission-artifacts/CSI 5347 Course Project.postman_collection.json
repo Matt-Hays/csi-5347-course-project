@@ -15,6 +15,16 @@
 						{
 							"name": "Create Product",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -27,13 +37,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/v1/product",
+									"raw": "http://localhost:8072/inventory/v1/product",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
 										"v1",
 										"product"
 									]
@@ -44,16 +55,27 @@
 						{
 							"name": "Get All Products",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/v1/product",
+									"raw": "http://localhost:8072/inventory/v1/product",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
 										"v1",
 										"product"
 									]
@@ -62,18 +84,97 @@
 							"response": []
 						},
 						{
-							"name": "Get Product by Id",
+							"name": "Add Quantity to Product",
 							"request": {
-								"method": "GET",
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/v1/product/1",
+									"raw": "http://localhost:8072/inventory/v1/product/1/add/10",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
+										"v1",
+										"product",
+										"1",
+										"add",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deduct Quantity from Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/product/1/deduct/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"product",
+										"1",
+										"deduct",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Product by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/product/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
 										"v1",
 										"product",
 										"1"
@@ -85,7 +186,17 @@
 						{
 							"name": "Update Product",
 							"request": {
-								"method": "PATCH",
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -97,13 +208,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/v1/product/1",
+									"raw": "http://localhost:8072/inventory/v1/product/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
 										"v1",
 										"product",
 										"1"
@@ -113,64 +225,29 @@
 							"response": []
 						},
 						{
-							"name": "Add Quantity to Product",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/product/1/add/5",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"product",
-										"1",
-										"add",
-										"5"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Deduct Quantity from Product",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/product/1/deduct/5",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"product",
-										"1",
-										"deduct",
-										"5"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Sale Product",
 							"request": {
-								"method": "PATCH",
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/v1/product/1/sale/2",
+									"raw": "http://localhost:8072/inventory/v1/product/1/sale/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
 										"v1",
 										"product",
 										"1",
@@ -184,18 +261,210 @@
 						{
 							"name": "Delete Product",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/v1/product/1",
+									"raw": "http://localhost:8072/inventory/v1/product/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
 										"v1",
 										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Vendor Endpoints",
+					"item": [
+						{
+							"name": "Create Vendor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Bob\",\n    \"email\": \"BobsEmail@Email.Email\",\n    \"phone\": \"555-555-5555\",\n    \"address\": \"123 Main St\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/vendor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"vendor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Vendors",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/vendor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"vendor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vendor by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/vendor/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"vendor",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Vendor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Bob\",\n    \"email\": \"BobsEmail@Email.Email\",\n    \"phone\": \"555-555-5555\",\n    \"address\": \"1234 Main St\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/vendor/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"vendor",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Vendor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/inventory/v1/vendor/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"inventory",
+										"v1",
+										"vendor",
 										"1"
 									]
 								}
@@ -208,49 +477,18 @@
 					"name": "Purchase Order Endpoints",
 					"item": [
 						{
-							"name": "Get All Purchase Orders",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/purchase",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"purchase"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Purchase Order by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/purchase/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"purchase",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Create Purchase Order",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -263,13 +501,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/v1/purchase",
+									"raw": "http://localhost:8072/inventory/v1/purchase",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8072",
 									"path": [
+										"inventory",
 										"v1",
 										"purchase"
 									]
@@ -278,8 +517,156 @@
 							"response": []
 						},
 						{
+							"name": "Get All Purchase Orders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/purchase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"purchase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Line Item",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"quantity\": 50,\n        \"product\": {\n            \"id\": \"1\"\n        }\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/purchase/1/lineItems",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"purchase",
+										"1",
+										"lineItems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Purchase Order by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/purchase/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"purchase",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Receive Purchase Order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/inventory/v1/purchase/1/receive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"inventory",
+										"v1",
+										"purchase",
+										"1",
+										"receive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update Purchase Order",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -308,199 +695,31 @@
 							"response": []
 						},
 						{
-							"name": "Add Line Item",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\n    {\n        \"quantity\": 50,\n        \"product\": {\n            \"id\": \"1\"\n        }\n    }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/v1/purchase/1/lineItems",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"purchase",
-										"1",
-										"lineItems"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Receive Purchase Order",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/purchase/1/receive",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"purchase",
-										"1",
-										"receive"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Delete Purchase Order",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/v1/purchase/1",
+									"raw": "http://localhost:8082/inventory/v1/purchase/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8080",
+									"port": "8082",
 									"path": [
+										"inventory",
 										"v1",
 										"purchase",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Vendor Endpoints",
-					"item": [
-						{
-							"name": "Get All Vendors",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/vendor",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"vendor"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Vendor by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/vendor/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"vendor",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Vendor",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Bob\",\n    \"email\": \"BobsEmail@Email.Email\",\n    \"phone\": \"555-555-5555\",\n    \"address\": \"123 Main St\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/v1/vendor",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"vendor"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Vendor",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Bob\",\n    \"email\": \"BobsEmail@Email.Email\",\n    \"phone\": \"555-555-5555\",\n    \"address\": \"1234 Main St\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/v1/vendor/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"vendor",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "New Request",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/v1/vendor/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"vendor",
 										"1"
 									]
 								}
@@ -518,49 +737,18 @@
 					"name": "Customer Endpoints",
 					"item": [
 						{
-							"name": "Get All Customers",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/customer",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"customer"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Customer by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/customer/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"customer",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Create Customer",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -573,13 +761,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/customer",
+									"raw": "http://localhost:8072/point-of-sale/v1/customer",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"customer"
 									]
@@ -588,8 +777,81 @@
 							"response": []
 						},
 						{
+							"name": "Get All Customers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"customer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/customer/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update Customer",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -602,13 +864,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/customer/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/customer/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"customer",
 										"1"
@@ -620,16 +883,27 @@
 						{
 							"name": "Delete Customer",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8082/v1/customer/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/customer/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"customer",
 										"1"
@@ -644,49 +918,18 @@
 					"name": "Employee Endpoints",
 					"item": [
 						{
-							"name": "Get All Employees",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/employee",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"employee"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Employee by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/employee/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"employee",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Create Employee",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -699,13 +942,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/employee",
+									"raw": "http://localhost:8072/point-of-sale/v1/employee",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"employee"
 									]
@@ -714,8 +958,81 @@
 							"response": []
 						},
 						{
+							"name": "Get All Employees",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/employee",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"employee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Employee by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/employee/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"employee",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update Employee",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -728,13 +1045,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/employee/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/employee/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"employee",
 										"1"
@@ -746,16 +1064,27 @@
 						{
 							"name": "Delete Employee",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8082/v1/employee/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/employee/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"employee",
 										"1"
@@ -772,16 +1101,27 @@
 						{
 							"name": "Get All Products",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8082/v1/product",
+									"raw": "http://localhost:8072/point-of-sale/v1/product",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"product"
 									]
@@ -792,16 +1132,27 @@
 						{
 							"name": "Get Product by Id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8082/v1/product/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/product/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"product",
 										"1"
@@ -813,11 +1164,21 @@
 						{
 							"name": "Create Product",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"id\": 1,\n    \"sku\": \"12EEE34\",\n    \"description\": \"Test product\"\n}",
+									"raw": "{\n    \"id\": 1,\n    \"sku\": \"12EEE34\",\n    \"description\": \"Test product\",\n    \"price\": \"12.99\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -825,13 +1186,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/product",
+									"raw": "http://localhost:8072/point-of-sale/v1/product",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"product"
 									]
@@ -842,11 +1204,21 @@
 						{
 							"name": "Update Product",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"id\": 1,\n    \"sku\": \"12EEE34\",\n    \"description\": \"Test product 22\"\n}",
+									"raw": "{\n    \"id\": 1,\n    \"version\": 0,\n    \"sku\": \"12EEE34\",\n    \"description\": \"Test product\",\n    \"price\": 10.99\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -854,13 +1226,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/product/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/product/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"product",
 										"1"
@@ -872,16 +1245,27 @@
 						{
 							"name": "Delete Product",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8082/v1/product/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/product/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"product",
 										"1"
@@ -896,49 +1280,18 @@
 					"name": "Register Endpoints",
 					"item": [
 						{
-							"name": "Get All Registers",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/register",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"register"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Register by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/register/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"register",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Create Register",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -951,13 +1304,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/register",
+									"raw": "http://localhost:8072/point-of-sale/v1/register",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"register"
 									]
@@ -966,8 +1320,81 @@
 							"response": []
 						},
 						{
+							"name": "Get All Registers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Register by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/register/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"register",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update Register",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -980,13 +1407,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/register/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/register/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"register",
 										"1"
@@ -998,16 +1426,27 @@
 						{
 							"name": "Delete Register",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8082/v1/register/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/register/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"register",
 										"1"
@@ -1022,49 +1461,18 @@
 					"name": "Transaction Endpoints",
 					"item": [
 						{
-							"name": "Get All Transactions",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/transaction",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"transaction"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Transaction by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/transaction/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"v1",
-										"transaction",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Create Transaction",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1077,13 +1485,45 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/transaction",
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
+										"v1",
+										"transaction"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Transactions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
 										"v1",
 										"transaction"
 									]
@@ -1094,6 +1534,16 @@
 						{
 							"name": "Update Transaction",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -1106,34 +1556,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/transaction/1",
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
-										"v1",
-										"transaction",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete Transaction",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8082/v1/transaction/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
+										"point-of-sale",
 										"v1",
 										"transaction",
 										"1"
@@ -1145,6 +1575,16 @@
 						{
 							"name": "Add Transaction Line Item",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1157,17 +1597,115 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8082/v1/transaction/1/item",
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction/1/item",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8082",
+									"port": "8072",
 									"path": [
+										"point-of-sale",
 										"v1",
 										"transaction",
 										"1",
 										"item"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Transaction by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"transaction",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Complete Purchase Order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction/1/complete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"transaction",
+										"1",
+										"complete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/point-of-sale/v1/transaction/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"point-of-sale",
+										"v1",
+										"transaction",
+										"1"
 									]
 								}
 							},
@@ -1181,43 +1719,105 @@
 			"name": "Loyalty Program Service",
 			"item": [
 				{
-					"name": "Loyalty Account Endpoints",
+					"name": "Customer Endpoints",
 					"item": [
 						{
-							"name": "Get All Accounts",
+							"name": "Create Customer",
 							"request": {
-								"method": "GET",
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost:8081/v1/loyalty",
+									"raw": "http://localhost:8072/loyalty-program/v1/customer",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8081",
+									"port": "8072",
 									"path": [
+										"loyalty-program",
 										"v1",
-										"loyalty"
+										"customer"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Get Account by Id",
+							"name": "Get All Customers",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8081/v1/loyalty/1",
+									"raw": "http://localhost:8072/loyalty-program/v1/customer",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8081",
+									"port": "8072",
 									"path": [
+										"loyalty-program",
 										"v1",
-										"loyalty",
+										"customer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/customer/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
+										"v1",
+										"customer",
 										"1"
 									]
 								}
@@ -1225,8 +1825,96 @@
 							"response": []
 						},
 						{
+							"name": "Update Customer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"loyaltyAccount\": {\n        \"id\": 2\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/customer/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
+										"v1",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Customer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/customer/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
+										"v1",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Loyalty Account Endpoints",
+					"item": [
+						{
 							"name": "Create Account",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -1239,13 +1927,45 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8081/v1/loyalty",
+									"raw": "http://localhost:8072/loyalty-program/v1/loyalty",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8081",
+									"port": "8072",
 									"path": [
+										"loyalty-program",
+										"v1",
+										"loyalty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Accounts",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/loyalty",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
 										"v1",
 										"loyalty"
 									]
@@ -1256,6 +1976,16 @@
 						{
 							"name": "Update Account",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PATCH",
 								"header": [],
 								"body": {
@@ -1268,16 +1998,131 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8081/v1/loyalty/1",
+									"raw": "http://localhost:8072/loyalty-program/v1/loyalty/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "8081",
+									"port": "8072",
 									"path": [
+										"loyalty-program",
 										"v1",
 										"loyalty",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Account by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/loyalty/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
+										"v1",
+										"loyalty",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Credit Account",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "points",
+										"value": "20",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/loyalty/1/credit/30.5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
+										"v1",
+										"loyalty",
+										"1",
+										"credit",
+										"30.5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deduct Account",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{bearer_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "points",
+										"value": "20",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8072/loyalty-program/v1/loyalty/1/credit/20.5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"loyalty-program",
+										"v1",
+										"loyalty",
+										"1",
+										"credit",
+										"20.5"
 									]
 								}
 							},
@@ -1298,208 +2143,6 @@
 									"path": [
 										"v1",
 										"loyalty",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Credit Account",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "points",
-										"value": "20",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8081/v1/loyalty/1/credit?points=30.5",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"loyalty",
-										"1",
-										"credit"
-									],
-									"query": [
-										{
-											"key": "points",
-											"value": "30.5"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Deduct Account",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "points",
-										"value": "20",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8081/v1/loyalty/1/deduct?points=20.5",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"loyalty",
-										"1",
-										"deduct"
-									],
-									"query": [
-										{
-											"key": "points",
-											"value": "20.5"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Customer Endpoints",
-					"item": [
-						{
-							"name": "Get All Customers",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/v1/customer",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"customer"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Customer by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/v1/customer/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"customer",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Customer",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\": 1\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8081/v1/customer",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"customer"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Customer",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"loyaltyAccount\": {\n        \"id\": 2\n    }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8081/v1/customer/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"customer",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete Customer",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8081/v1/customer/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8081",
-									"path": [
-										"v1",
-										"customer",
 										"1"
 									]
 								}
@@ -1534,6 +2177,66 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Admin Token Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "pos-system",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "pos-admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "my-secret",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"master",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "bearer_token",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
