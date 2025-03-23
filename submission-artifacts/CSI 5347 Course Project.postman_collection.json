@@ -2327,7 +2327,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"id\": \"{{role_id}}\",\n        \"name\": \"{{role_name}}\"\n    }\n]",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2335,7 +2335,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/realms/master/users/{{user_id}}/role-mappings/realm",
+							"raw": "http://localhost:8080/admin/realms/master/clients",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2345,10 +2345,7 @@
 								"admin",
 								"realms",
 								"master",
-								"users",
-								"{{user_id}}",
-								"role-mappings",
-								"realm"
+								"clients"
 							]
 						}
 					},
@@ -2431,6 +2428,59 @@
 								"role-mappings",
 								"clients",
 								"{{client_uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cashier Token Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "pos-system",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "pos-user",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "my-secret",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"master",
+								"protocol",
+								"openid-connect",
+								"token"
 							]
 						}
 					},
