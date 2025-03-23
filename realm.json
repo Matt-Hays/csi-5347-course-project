@@ -50,6 +50,22 @@
   "roles": {
     "realm": [
       {
+        "id": "100ead7c-e1b2-4ab6-bc3a-1022e4812fc6",
+        "name": "pos-cashier",
+        "description": "",
+        "composite": true,
+        "composites": {
+          "client": {
+            "pos-system": [
+              "CASHIER"
+            ]
+          }
+        },
+        "clientRole": false,
+        "containerId": "1fdfb93f-f254-4a48-b098-46b5f59e3fde",
+        "attributes": {}
+      },
+      {
         "id": "b766dd92-6607-4299-916b-aa42c9cb0ff0",
         "name": "default-roles-master",
         "description": "${role_default-roles}",
@@ -1643,14 +1659,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-address-mapper",
             "saml-user-attribute-mapper",
-            "oidc-full-name-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
             "oidc-usermodel-attribute-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-full-name-mapper",
             "saml-role-list-mapper",
             "saml-user-property-mapper",
-            "oidc-usermodel-property-mapper"
+            "oidc-address-mapper"
           ]
         }
       },
@@ -1662,14 +1678,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-usermodel-property-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
-            "oidc-address-mapper",
-            "saml-user-property-mapper",
             "oidc-usermodel-attribute-mapper",
-            "oidc-full-name-mapper",
+            "saml-user-attribute-mapper",
+            "saml-user-property-mapper",
             "saml-role-list-mapper",
-            "saml-user-attribute-mapper"
+            "oidc-sha256-pairwise-sub-mapper",
+            "oidc-full-name-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-address-mapper"
           ]
         }
       },

@@ -2179,63 +2179,290 @@
 			]
 		},
 		{
-			"name": "Admin Token Request",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "grant_type",
-							"value": "password",
-							"type": "text"
+			"name": "Keycloak",
+			"item": [
+				{
+					"name": "Admin Token Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "pos-system",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "pos-admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "my-secret",
+									"type": "text"
+								}
+							]
 						},
-						{
-							"key": "client_id",
-							"value": "pos-system",
-							"type": "text"
-						},
-						{
-							"key": "username",
-							"value": "pos-admin",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "password",
-							"type": "text"
-						},
-						{
-							"key": "client_secret",
-							"value": "my-secret",
-							"type": "text"
+						"url": {
+							"raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"master",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"realms",
-						"master",
-						"protocol",
-						"openid-connect",
-						"token"
-					]
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"pos-user\",\n    \"firstName\": \"f\",\n    \"lastName\": \"l\",\n    \"email\": \"pos-user@test.com\",\n    \"emailVerified\": false,\n    \"enabled\": true,\n    \"totp\": false,\n    \"disableableCredentialTypes\": [],\n    \"requiredActions\": [],\n    \"notBefore\": 0,\n    \"access\": {\n        \"manageGroupMembership\": true,\n        \"view\": true,\n        \"mapRoles\": true,\n        \"impersonate\": true,\n        \"manage\": true\n    },\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"password\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/realms/master/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"realms",
+								"master",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/admin/realms/master/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"realms",
+								"master",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Clients",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{role_id}}\",\n        \"name\": \"{{role_name}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/realms/master/users/{{user_id}}/role-mappings/realm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"realms",
+								"master",
+								"users",
+								"{{user_id}}",
+								"role-mappings",
+								"realm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/admin/realms/master/users/{{user_id}}/role-mappings/clients/{{client_uuid}}/available",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"realms",
+								"master",
+								"users",
+								"{{user_id}}",
+								"role-mappings",
+								"clients",
+								"{{client_uuid}}",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Role-Mapping",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{role_id}}\",\n        \"name\": \"{{role_name}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/realms/master/users/{{user_id}}/role-mappings/clients/{{client_uuid}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"realms",
+								"master",
+								"users",
+								"{{user_id}}",
+								"role-mappings",
+								"clients",
+								"{{client_uuid}}"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"variable": [
 		{
 			"key": "bearer_token",
 			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "client_uuid",
+			"value": "9209c0c4-3088-4b10-bee3-27274c2c89f1",
+			"type": "default"
+		},
+		{
+			"key": "user_id",
+			"value": "954c75f3-5fd7-438b-b6e5-83b91398cae1",
+			"type": "default"
+		},
+		{
+			"key": "role_id",
+			"value": "82987e25-12d0-464b-83c8-f2a6faaf4262",
+			"type": "default"
+		},
+		{
+			"key": "role_name",
+			"value": "CASHIER",
 			"type": "default"
 		}
 	]
