@@ -49,7 +49,7 @@ services:
           - "servicediscovery"
 
   gateway-server:
-    image: docker.io/library/gatewayserver:0.0.1-SNAPSHOT
+    image: docker.io/library/gateway-server:0.0.1-SNAPSHOT
     restart: on-failure
     ports:
       - "${GATEWAY_PORT:-8072}:${GATEWAY_PORT:-8072}"
