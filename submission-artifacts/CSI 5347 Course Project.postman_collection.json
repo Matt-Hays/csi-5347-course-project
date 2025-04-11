@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "35aa456d-729c-4c43-b78b-adf2a9994c2b",
+		"_postman_id": "a3de9a9b-da7a-4657-9b9e-583bdd05e2ed",
 		"name": "CSI 5347 Course Project",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25800081"
+		"_exporter_id": "17018911"
 	},
 	"item": [
 		{
@@ -2184,6 +2184,21 @@
 				{
 					"name": "Admin Token Request",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "my-secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pos-system",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -2201,12 +2216,12 @@
 								},
 								{
 									"key": "username",
-									"value": "pos-admin",
+									"value": "admin",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "password",
+									"value": "admin",
 									"type": "text"
 								},
 								{
@@ -2217,18 +2232,15 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+							"raw": "http://localhost:8072/auth-service/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8072",
 							"path": [
-								"realms",
-								"master",
-								"protocol",
-								"openid-connect",
-								"token"
+								"auth-service",
+								"login"
 							]
 						}
 					},
@@ -2251,7 +2263,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"pos-user\",\n    \"firstName\": \"f\",\n    \"lastName\": \"l\",\n    \"email\": \"pos-user@test.com\",\n    \"emailVerified\": false,\n    \"enabled\": true,\n    \"totp\": false,\n    \"disableableCredentialTypes\": [],\n    \"requiredActions\": [],\n    \"notBefore\": 0,\n    \"access\": {\n        \"manageGroupMembership\": true,\n        \"view\": true,\n        \"mapRoles\": true,\n        \"impersonate\": true,\n        \"manage\": true\n    },\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"password\"\n        }\n    ]\n}",
+							"raw": "{\n    \"username\": \"matt.hays\",\n    \"firstName\": \"f\",\n    \"lastName\": \"l\",\n    \"email\": \"pos-user@test.com\",\n    \"emailVerified\": false,\n    \"enabled\": true,\n    \"totp\": false,\n    \"disableableCredentialTypes\": [],\n    \"requiredActions\": [],\n    \"notBefore\": 0,\n    \"access\": {\n        \"manageGroupMembership\": true,\n        \"view\": true,\n        \"mapRoles\": true,\n        \"impersonate\": true,\n        \"manage\": true\n    },\n    \"credentials\": [\n        {\n            \"type\": \"password1\",\n            \"value\": \"password1\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2259,17 +2271,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/realms/master/users",
+							"raw": "http://localhost:8072/auth-service/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8072",
 							"path": [
-								"admin",
-								"realms",
-								"master",
-								"users"
+								"auth-service",
+								"register"
 							]
 						}
 					},
@@ -2481,6 +2491,100 @@
 								"protocol",
 								"openid-connect",
 								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "my-secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "pos-system",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "matt.hays",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8072/auth-service/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"auth-service",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Security User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"matt.hays\",\n    \"enabled\": true,\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"password1\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/auth-service/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"auth-service",
+								"register"
 							]
 						}
 					},
