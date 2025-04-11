@@ -45,3 +45,7 @@ secrets.yml
 node_modules
 
 */~$*
+
+*Video*
+*.mp4
+*.mov
