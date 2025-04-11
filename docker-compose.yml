@@ -21,6 +21,86 @@ services:
         aliases:
           - "keycloak"
 
+  redis-server:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      backend:
+        aliases:
+          - "redis"
+
+  elasticsearch:
+    image: elasticsearch:8.16.6
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "xpack.security.enabled=false"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9300:9300
+      - 9200:9200
+    networks:
+      backend:
+        aliases:
+          - "elasticsearch"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9200" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  kibana:
+    image: kibana:8.16.6
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_URL: "http://elasticsearch:9300"
+    ports:
+      - 5601:5601
+    networks:
+      backend:
+        aliases:
+          - "kibana"
+
+  logstash:
+    image: logstash:8.16.6
+    container_name: logstash
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    volumes:
+      - .:/etc/logstash/conf.d
+    ports:
+      - "9000:9000"
+    networks:
+      backend:
+        aliases:
+          - "logstash"
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      - "ES_HOSTS=elasticsearch:9300"
+    ports:
+      - "9411:9411"
+    networks:
+      backend:
+        aliases:
+          - "zipkin"
+
   configuration-server:
     image: docker.io/library/configuration-server:0.0.1-SNAPSHOT
     restart: on-failure
@@ -71,6 +151,8 @@ services:
         condition: service_started
       service-discovery:
         condition: service_started
+      elasticsearch:
+        condition: service_healthy
     networks:
       backend:
         aliases:
@@ -158,6 +240,8 @@ services:
         condition: service_started
       service-discovery:
         condition: service_started
+      elasticsearch:
+        condition: service_healthy
     networks:
       - backend
 
@@ -175,6 +259,8 @@ services:
         condition: service_healthy
       configuration-server:
         condition: service_started
+      elasticsearch:
+        condition: service_healthy
     networks:
       - backend
 
@@ -194,9 +280,14 @@ services:
         condition: service_started
       service-discovery:
         condition: service_started
+      elasticsearch:
+        condition: service_healthy
     networks:
       - backend
 
 networks:
   backend:
     driver: bridge
+volumes:
+  esdata1:
+    driver: local
